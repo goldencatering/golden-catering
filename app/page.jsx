@@ -31,19 +31,38 @@ export default function Home() {
       </header>
 
       <main id="main">
-        <section className="hero">
+        <section className="hero" aria-labelledby="hero-heading">
           <div className="shell hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">Indian &amp; Pakistani catering · Brampton, ON</p>
-              <h1>Set the table.<br /><em>Bring everyone together.</em></h1>
-              <p className="intro">From wedding feasts to family celebrations, Chef Adrees Athwal brings Indian and Pakistani cooking to your event, with vegetarian and non-vegetarian options for your guests.</p>
-              <div className="actions">
-                <a className="button" href="#quote">Plan your event <span aria-hidden="true">↗</span></a>
-                <a className="text-link" href="#menu">Explore the menu <span aria-hidden="true">↓</span></a>
+              <p className="eyebrow hero-location">Brampton, Ontario</p>
+              <h1 id="hero-heading">A feast worth <em>gathering for.</em></h1>
+              <p className="intro">
+                Indian and Pakistani catering for weddings and celebrations.
+                Choose vegetarian and non-vegetarian dishes for your guests.
+              </p>
+              <div className="actions hero-actions">
+                <a className="button button-primary" href="#quote">
+                  Request a catering quote <span aria-hidden="true">↗</span>
+                </a>
+                <a className="text-link" href="#menu">
+                  Explore the menu <span aria-hidden="true">↓</span>
+                </a>
               </div>
+              <p className="hero-experience">
+                <strong>20+</strong>
+                <span>years of experience<br /><a href="#chef">Chef Adrees Athwal</a></span>
+              </p>
             </div>
-            <div className="hero-frame">
-              <Image src={photo(29186507, 1100)} alt="An assortment of Indian curries, kebabs, and starters" fill unoptimized preload />
+            <div className="hero-visual">
+              <div className="hero-frame">
+                <Image
+                  src={photo(29186507, 1100)}
+                  alt="An assortment of Indian curries, kebabs, and starters"
+                  fill
+                  unoptimized
+                  preload
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -77,16 +96,16 @@ export default function Home() {
           <div>
             <p className="eyebrow">Owner &amp; chef</p>
             <h2 id="chef-heading">Meet Chef Adrees Athwal.</h2>
-            <p className="intro">Chef Adrees Athwal owns and leads Golden Catering in Brampton, Ontario. Share the dishes your family loves and what your guests need, and discuss a menu for your occasion.</p>
+            <p className="intro">With more than 20 years of experience, owner and chef Adrees Athwal leads Golden Catering in Brampton, Ontario. Work with Chef Adrees to plan a menu around the dishes your family loves.</p>
           </div>
         </section>
 
-        <section className="quote" id="quote" aria-labelledby="quote-heading">
+        <section className="quote" id="quote" aria-labelledby="quote-heading" tabIndex={-1}>
           <div className="shell section split">
             <div>
               <p className="eyebrow">Catering inquiries</p>
-              <h2 id="quote-heading">Let’s plan your event.</h2>
-              <p className="intro">Share your event date, venue, and estimated guest count. Include any menu preferences or dietary needs you’d like to discuss.</p>
+              <h2 id="quote-heading">Tell us about your event.</h2>
+              <p className="intro">Start with your date, venue, and estimated guest count. Add favourite dishes or dietary needs so Chef Adrees knows what to plan for.</p>
             </div>
             <QuoteForm />
           </div>
@@ -102,3 +121,4 @@ export default function Home() {
     </>
   );
 }
+
