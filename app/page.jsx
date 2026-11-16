@@ -162,17 +162,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <div className="shell footer-inner">
-          <Brand />
-          <address className="footer-contact">
-            <a href={googleProfile}>{businessAddress.streetAddress}, {businessAddress.addressLocality}, {businessAddress.addressRegion} {businessAddress.postalCode}</a>
-            <a href={'tel:' + phone}>647-280-6639</a>
-            <a href={'mailto:' + contactEmail}>{contactEmail}</a>
-          </address>
-          <a className="text-link" href="#quote">Book your event <span aria-hidden="true">→</span></a>
-        </div>
-      </footer>
     </>
   );
 }

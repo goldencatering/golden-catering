@@ -69,9 +69,6 @@ export default async function CityPage({ params }) {
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <div className="shell footer-inner"><a href="/">Golden Catering</a><a href="/#areas">Other service areas</a><a href="/#quote">Book your event</a></div>
-      </footer>
     </>
   );
 }

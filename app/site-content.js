@@ -68,3 +68,11 @@ export const cities = [
     venue: 'For a residential event, share your planned meal time and whether you have counter space, tables, or another dedicated serving area.',
   },
 ];
+
+export const siteNavigation = [
+  { label: 'Catering menu', href: '/#menu' },
+  { label: 'Event services', href: '/#events' },
+  { label: 'Meet our chef', href: '/#chef' },
+  { label: 'Google reviews', href: '/#reviews' },
+  { label: 'Book your event', href: '/#quote' },
+];

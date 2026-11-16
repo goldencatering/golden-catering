@@ -1,4 +1,5 @@
 import './globals.css';
+import SiteFooter from './site-footer';
 import { siteUrl } from './site-content';
 
 export const metadata = {
@@ -10,7 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-CA">
-      <body>{children}</body>
+      <body>
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
