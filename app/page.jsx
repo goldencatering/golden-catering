@@ -42,7 +42,7 @@ export default function Home() {
               </p>
               <div className="actions hero-actions">
                 <a className="button button-primary" href="#quote">
-                  Request a catering quote <span aria-hidden="true">↗</span>
+                  Request a catering quote <span className="button-arrow" aria-hidden="true" />
                 </a>
                 <a className="text-link" href="#menu">
                   Explore the menu <span aria-hidden="true">↓</span>
