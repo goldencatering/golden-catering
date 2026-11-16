@@ -8,7 +8,6 @@ function photo(id, width) {
 function Brand() {
   return (
     <a className="brand" href="#top" aria-label="Golden Catering home">
-      <span className="monogram" aria-hidden="true">G</span>
       <span>Golden <small>Catering</small></span>
     </a>
   );
@@ -26,7 +25,7 @@ export default function Home() {
             <a href="#events">Events</a>
             <a href="#chef">Our chef</a>
           </nav>
-          <a className="button outline" href="#quote">Request a quote</a>
+          <a className="button outline" href="#quote">Book your event</a>
         </div>
       </header>
 
@@ -42,7 +41,7 @@ export default function Home() {
               </p>
               <div className="actions hero-actions">
                 <a className="button button-primary" href="#quote">
-                  Request a catering quote <span className="button-arrow" aria-hidden="true" />
+                  Book your event <span className="button-arrow" aria-hidden="true" />
                 </a>
                 <a className="text-link" href="#menu">
                   Explore the menu <span aria-hidden="true">↓</span>
@@ -54,6 +53,11 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-visual">
+              <div className="cloche" aria-hidden="true">
+                <span className="cloche-handle" />
+                <span className="cloche-dome" />
+                <span className="cloche-tray" />
+              </div>
               <div className="hero-frame">
                 <Image
                   src={photo(29186507, 1100)}
@@ -70,7 +74,7 @@ export default function Home() {
         <section className="section shell" id="menu" aria-labelledby="menu-heading">
           <p className="eyebrow">Sample catering menu</p>
           <h2 id="menu-heading">Something for every guest.</h2>
-          <p className="intro">Explore dishes to discuss with Chef Adrees when planning your menu.</p>
+          <p className="intro">Build your spread with starters, vegetarian and non-vegetarian mains, rice, breads, and sweets. Ask Chef Adrees about availability for your date.</p>
           <Menu />
         </section>
 
@@ -103,9 +107,9 @@ export default function Home() {
         <section className="quote" id="quote" aria-labelledby="quote-heading" tabIndex={-1}>
           <div className="shell section split">
             <div>
-              <p className="eyebrow">Catering inquiries</p>
-              <h2 id="quote-heading">Tell us about your event.</h2>
-              <p className="intro">Start with your date, venue, and estimated guest count. Add favourite dishes or dietary needs so Chef Adrees knows what to plan for.</p>
+              <p className="eyebrow">Booking inquiries</p>
+              <h2 id="quote-heading">Book your event.</h2>
+              <p className="intro">Share your date, location, and guest count to prepare your booking inquiry. You can include favourite dishes and dietary needs.</p>
             </div>
             <QuoteForm />
           </div>
@@ -115,10 +119,11 @@ export default function Home() {
         <div className="shell footer-inner">
           <Brand />
           <p>Brampton, Ontario, Canada</p>
-          <a className="text-link" href="#quote">Catering inquiries <span aria-hidden="true">↗</span></a>
+          <a className="text-link" href="#quote">Book your event <span aria-hidden="true">→</span></a>
         </div>
       </footer>
     </>
   );
 }
+
 
