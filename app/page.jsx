@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Menu, QuoteForm } from './interactive';
-import { cities, contactEmail, googleProfile, phone, siteUrl } from './site-content';
+import { businessAddress, cities, contactEmail, googleProfile, phone, siteUrl } from './site-content';
 
 function photo(id, width) {
   return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + width;
@@ -19,14 +19,15 @@ export const metadata = { alternates: { canonical: '/' } };
 export default function Home() {
   const business = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "LocalBusiness",
     "@id": siteUrl + "/#business",
     name: "Golden Catering",
     url: siteUrl,
     logo: siteUrl + "/golden-catering-logo.jpg",
     email: contactEmail,
     telephone: phone,
-    address: { "@type": "PostalAddress", addressLocality: "Brampton", addressRegion: "ON", addressCountry: "CA" },
+    address: { "@type": "PostalAddress", ...businessAddress },
+    hasMap: googleProfile,
     areaServed: cities.map(city => ({ "@type": "City", name: city.name })),
   };
   return (
@@ -50,10 +51,10 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-heading">
           <div className="shell hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow hero-location">Family-owned &amp; operated · Brampton, ON</p>
+              <p className="eyebrow hero-location">Family-owned &amp; operated in Ontario</p>
               <h1 id="hero-heading">A feast worth <em>gathering for.</em></h1>
               <p className="intro">
-                Golden Catering is a family-run Indian and Pakistani caterer in Brampton, Ontario. Plan a vegetarian, non-vegetarian, or mixed menu for your wedding, corporate event, or private celebration.
+                Golden Catering is a family-run Indian and Pakistani caterer based in Georgetown, serving Brampton and the GTA. Plan a vegetarian, non-vegetarian, or mixed menu for your wedding, corporate event, or private celebration.
               </p>
               <div className="actions hero-actions">
                 <a className="button button-primary" href="#quote">
@@ -123,7 +124,7 @@ export default function Home() {
         <section className="services-areas" id="areas" aria-labelledby="areas-heading">
           <div className="section shell">
             <p className="eyebrow">Service areas</p>
-            <h2 id="areas-heading">Catering in Brampton and across the GTA.</h2>
+            <h2 id="areas-heading">Catering in Halton Hills, Brampton and across the GTA.</h2>
             <p className="intro">Choose the city where you’re hosting your event for menu ideas and venue-planning details.</p>
             <ul className="city-grid">
               {cities.map(city => (
@@ -165,7 +166,7 @@ export default function Home() {
         <div className="shell footer-inner">
           <Brand />
           <address className="footer-contact">
-            <span>Brampton, Ontario, Canada</span>
+            <a href={googleProfile}>{businessAddress.streetAddress}, {businessAddress.addressLocality}, {businessAddress.addressRegion} {businessAddress.postalCode}</a>
             <a href={'tel:' + phone}>647-280-6639</a>
             <a href={'mailto:' + contactEmail}>{contactEmail}</a>
           </address>

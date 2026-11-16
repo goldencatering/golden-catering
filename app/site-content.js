@@ -1,14 +1,29 @@
 export const siteUrl = 'https://goldencatering.ca';
 export const contactEmail = 'goldencatering7@gmail.com';
 export const phone = '+16472806639';
-export const googleProfile = 'https://www.google.com/maps/search/?api=1&query=Golden+Catering+647-280-6639';
+export const businessAddress = {
+  streetAddress: '11549 10 Line',
+  addressLocality: 'Georgetown',
+  addressRegion: 'ON',
+  postalCode: 'L7G 4S7',
+  addressCountry: 'CA',
+};
+export const googleProfile = 'https://www.google.com/maps/search/?api=1&query=Golden+Catering%2C+11549+10+Line%2C+Halton+Hills%2C+ON+L7G+4S7';
 
 export const cities = [
+  {
+    name: 'Georgetown',
+    slug: 'georgetown',
+    focus: 'Halton Hills receptions, family events and community gatherings',
+    intro: 'Golden Catering is family-owned and operated in Georgetown, Ontario. Chef Adrees Athwal prepares Indian and Pakistani menus for weddings, work events, and family celebrations in Halton Hills.',
+    idea: 'For a family celebration, start with vegetable samosas and chicken seekh kebabs. Add vegetable biryani, dal makhani, and chicken karahi so everyone can build a plate.',
+    venue: 'If your event is at a rural property or community hall, share the exact entrance, parking instructions, and access to tables or an indoor serving area.',
+  },
   {
     name: 'Brampton',
     slug: 'brampton',
     focus: 'Weddings, mehndi celebrations and family milestones',
-    intro: 'Golden Catering is a family-owned and operated Brampton caterer led by Chef Adrees Athwal. Plan an Indian and Pakistani menu for a wedding, mehndi, reception, or family gathering with vegetarian and non-vegetarian choices.',
+    intro: 'Golden Catering is a family-owned and operated caterer serving Brampton, led by Chef Adrees Athwal. Plan an Indian and Pakistani menu for a wedding, mehndi, reception, or family gathering with vegetarian and non-vegetarian choices.',
     idea: 'For a wedding weekend, plan a different menu for each gathering. Consider paneer tikka and vegetable pakoras for the mehndi, then lamb karahi, dal makhani, and hot gulab jamun for the reception.',
     venue: 'If you are hosting events at more than one venue, share separate addresses, guest counts, and meal times for each gathering.',
   },
