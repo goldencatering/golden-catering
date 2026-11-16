@@ -1,8 +1,10 @@
 import './globals.css';
+import { siteUrl } from './site-content';
 
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Golden Catering | Indian & Pakistani Catering in Brampton',
-  description: 'Indian and Pakistani event catering in Brampton, Ontario, led by owner and chef Adrees Athwal. Vegetarian and non-vegetarian menu options.',
+  description: 'Family-owned Indian and Pakistani catering in Brampton and the GTA, led by Chef Adrees Athwal. Wedding, corporate, and private events with vegetarian and non-vegetarian menus.',
 };
 
 export default function RootLayout({ children }) {
@@ -12,3 +14,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

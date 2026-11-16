@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { cities, contactEmail } from './site-content';
 
 const menus = {
   Starters: [
@@ -66,57 +67,49 @@ export function Menu() {
   );
 }
 
-const cateringEmail = process.env.NEXT_PUBLIC_CATERING_EMAIL?.trim();
-
-const labels = {
-  name: 'Name',
-  email: 'Reply email',
-  occasion: 'Occasion',
-  date: 'Event date',
-  guests: 'Estimated guests',
-  venue: 'Venue or city',
-  preference: 'Menu preference',
-  details: 'Additional details',
-};
-
 export function QuoteForm() {
-  const [draft, setDraft] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState({ type: 'idle', message: '' });
+  const [venue, setVenue] = useState('');
+  const pending = useRef(false);
 
-  function prepareInquiry(event) {
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get('city');
+    const city = cities.find(item => item.slug === slug);
+    if (city) setVenue(city.name);
+  }, []);
+
+  async function sendInquiry(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const lines = Object.entries(labels).flatMap(([field, label]) => {
-      const value = String(data.get(field) ?? '').trim();
-      return value ? [label + ': ' + value] : [];
-    });
-    setDraft(['Hello Golden Catering,', '', 'I’d like to inquire about booking catering.', '', ...lines].join('\n'));
-    setStatus('Your booking inquiry is ready below.');
-  }
-
-  async function copyInquiry() {
+    if (pending.current) return;
+    const form = event.currentTarget;
+    const details = Object.fromEntries(new FormData(form));
+    pending.current = true;
+    setStatus({ type: 'sending', message: 'Sending your inquiry…' });
     try {
-      await navigator.clipboard.writeText(draft);
-      setStatus('Inquiry copied.');
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(details),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        setStatus({ type: 'error', message: result.message || 'Your inquiry could not be sent. Try again or email us.' });
+        return;
+      }
+      form.reset();
+      setStatus({ type: 'success', message: 'Inquiry received. Golden Catering will contact you about your event.' });
     } catch {
-      setStatus('Select the inquiry text and copy it manually.');
+      setStatus({ type: 'error', message: 'We could not confirm receipt. Email us if the problem continues.' });
+    } finally {
+      pending.current = false;
     }
   }
 
-  function clearDraft() {
-    setDraft('');
-    setStatus('');
-  }
-
-  const emailLink = cateringEmail && draft
-    ? 'mailto:' + cateringEmail + '?subject=' + encodeURIComponent('Catering booking inquiry') + '&body=' + encodeURIComponent(draft)
-    : null;
-
   return (
-    <form className="form" onSubmit={prepareInquiry} aria-labelledby="booking-form-title">
+    <form className="form" method="post" action="/api/booking" onSubmit={sendInquiry} aria-labelledby="booking-form-title">
       <h3 id="booking-form-title">Booking inquiry</h3>
       <p className="form-note form-lead">Include your date if you have one. A booking is confirmed once you hear back from Golden Catering.</p>
-      <div className="fields" onChange={clearDraft}>
+      <div className="fields">
         <label>Your name<input name="name" autoComplete="name" required maxLength={100} /></label>
         <label>Email<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
         <label>Occasion
@@ -129,8 +122,8 @@ export function QuoteForm() {
           </select>
         </label>
         <label>Event date<input name="date" type="date" /></label>
-        <label>Estimated guests<input name="guests" type="number" min="1" step="1" required /></label>
-        <label>Venue or city<input name="venue" maxLength={150} required /></label>
+        <label>Estimated guests<input name="guests" type="number" min="1" max="10000" step="1" required /></label>
+        <label>Venue or city<input name="venue" defaultValue={venue} maxLength={150} required /></label>
         <label className="full">Menu preference
           <select name="preference">
             <option>Vegetarian and non-vegetarian</option>
@@ -143,19 +136,15 @@ export function QuoteForm() {
           <textarea name="details" rows={3} maxLength={800} placeholder="Favourite dishes, schedule, or dietary needs" />
         </label>
       </div>
-      <button className="button" type="submit">Prepare booking inquiry <span aria-hidden="true">→</span></button>
-      <p className="form-note">{cateringEmail ? 'Review your inquiry, then open it in your email app to send.' : 'Copy your prepared inquiry to share with Golden Catering.'}</p>
-      <p className="status" role="status">{status}</p>
-      {draft && (
-        <div className="draft">
-          <label>Inquiry draft<textarea rows={8} value={draft} readOnly /></label>
-          <div className="actions">
-            <button className="button secondary" type="button" onClick={copyInquiry}>Copy inquiry</button>
-            {emailLink && <a className="button secondary" href={emailLink}>Open email draft</a>}
-          </div>
-        </div>
-      )}
+      <div className="booking-check" aria-hidden="true">
+        <label>Leave blank<input name="website" tabIndex={-1} autoComplete="off" /></label>
+      </div>
+      <button className="button" type="submit" disabled={status.type === 'sending'}>
+        {status.type === 'sending' ? 'Sending…' : 'Send booking inquiry'} <span aria-hidden="true">→</span>
+      </button>
+      <p className="form-note">We’ll use your details to respond to your event inquiry.</p>
+      <p className="status" role="status" aria-live="polite">{status.message}</p>
+      {status.type === 'error' && <a className="text-link" href={'mailto:' + contactEmail}>Email Golden Catering</a>}
     </form>
   );
 }
-

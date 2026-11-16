@@ -342,10 +342,33 @@ h3 { font-size: 1.32rem; line-height: 1.2; }
   to { opacity: 1; transform: perspective(600px) translateY(0) rotateY(0) rotateZ(0); }
 }
 
-.official-logo {
-  display: block;
-  width: clamp(8rem, 17vw, 11rem);
-  height: auto;
-  border-radius: .22rem;
-  background: #fff;
+.official-logo { display: block; width: clamp(8rem, 17vw, 11rem); height: auto; border-radius: .22rem; background: #fff; }
+.services-areas { background: var(--sand); }
+.city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .8rem; padding: 0; margin: 1.6rem 0 0; list-style: none; }
+.city-grid a { display: grid; gap: .25rem; height: 100%; padding: 1.15rem; background: var(--paper); border: 1px solid var(--line); border-radius: .3rem; }
+.city-grid a:hover { border-color: var(--bronze); }
+.city-grid strong { font: 1.7rem/1.05 var(--serif); }
+.city-grid span, .review-panel > p:not(.review-score) { color: var(--muted); font-size: .9rem; }
+.review-section { display: grid; grid-template-columns: 1fr minmax(15rem, 22rem); align-items: center; gap: clamp(1.5rem, 5vw, 5rem); }
+.review-panel { padding: 1.25rem 1.45rem; border: 1px solid var(--line); border-left: 3px solid var(--gold); }
+.review-score { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; color: var(--bronze); }
+.review-score strong { font: 2.5rem/1 var(--serif); color: var(--deep); }
+.review-panel .button { margin-top: .9rem; }
+.footer-contact { display: grid; font-style: normal; font-size: .9rem; }
+.footer-contact a:hover, .local-faq a { text-decoration: underline; }
+.city-hero .section { padding-block: clamp(3rem, 7vw, 5.25rem); }
+.city-hero h1 { max-width: 13ch; font-size: clamp(3rem, 7vw, 5.8rem); }
+.city-hero .intro { max-width: 40rem; }
+.city-back { display: inline-block; margin-bottom: 1rem; }
+.local-planning { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.35rem; }
+.local-faq { max-width: 50rem; margin-top: 3rem; }
+.local-faq h2 { margin-bottom: 1rem; font-size: clamp(2rem, 4vw, 3rem); }
+.local-faq details { border-top: 1px solid var(--line); padding-block: .85rem; }
+.local-faq summary { cursor: pointer; font-weight: 700; }
+.local-faq details p { margin: .4rem 0 0; color: var(--muted); }
+@media (max-width: 670px) {
+  .review-section, .local-planning { grid-template-columns: 1fr; }
 }
+
+.booking-check { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.form button:disabled { opacity: .7; cursor: wait; }

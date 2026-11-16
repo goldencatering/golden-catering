@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Menu, QuoteForm } from './interactive';
+import { cities, contactEmail, googleProfile, phone, siteUrl } from './site-content';
 
 function photo(id, width) {
   return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + width;
@@ -8,18 +9,26 @@ function photo(id, width) {
 function Brand() {
   return (
     <a className="brand" href="#top" aria-label="Golden Catering home">
-      <Image
-        className="official-logo"
-        src="/golden-catering-logo.jpg"
-        width={480}
-        height={210}
-        alt="Golden Catering"
-      />
+      <Image className="official-logo" src="/golden-catering-logo.jpg" width={480} height={210} alt="Golden Catering" />
     </a>
   );
 }
 
+export const metadata = { alternates: { canonical: '/' } };
+
 export default function Home() {
+  const business = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": siteUrl + "/#business",
+    name: "Golden Catering",
+    url: siteUrl,
+    logo: siteUrl + "/golden-catering-logo.jpg",
+    email: contactEmail,
+    telephone: phone,
+    address: { "@type": "PostalAddress", addressLocality: "Brampton", addressRegion: "ON", addressCountry: "CA" },
+    areaServed: cities.map(city => ({ "@type": "City", name: city.name })),
+  };
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
@@ -28,22 +37,23 @@ export default function Home() {
           <Brand />
           <nav aria-label="Main navigation">
             <a href="#menu">Menu</a>
-            <a href="#events">Events</a>
-            <a href="#chef">Our chef</a>
+            <a href="#events">Services</a>
+            <a href="#areas">Service areas</a>
+            <a href="#reviews">Reviews</a>
           </nav>
           <a className="button outline" href="#quote">Book your event</a>
         </div>
       </header>
 
       <main id="main">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(business) }} />
         <section className="hero" aria-labelledby="hero-heading">
           <div className="shell hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow hero-location">Brampton, Ontario</p>
+              <p className="eyebrow hero-location">Family-owned &amp; operated · Brampton, ON</p>
               <h1 id="hero-heading">A feast worth <em>gathering for.</em></h1>
               <p className="intro">
-                Indian and Pakistani catering for weddings and celebrations.
-                Choose vegetarian and non-vegetarian dishes for your guests.
+                Golden Catering is a family-run Indian and Pakistani caterer in Brampton, Ontario. Plan a vegetarian, non-vegetarian, or mixed menu for your wedding, corporate event, or private celebration.
               </p>
               <div className="actions hero-actions">
                 <a className="button button-primary" href="#quote">
@@ -104,9 +114,39 @@ export default function Home() {
         <section className="section shell chef" id="chef" aria-labelledby="chef-heading">
           <span className="chef-initials" aria-hidden="true">AA</span>
           <div>
-            <p className="eyebrow">Owner &amp; chef</p>
+            <p className="eyebrow">Family-owned and operated</p>
             <h2 id="chef-heading">Meet Chef Adrees Athwal.</h2>
-            <p className="intro">With more than 20 years of experience, owner and chef Adrees Athwal leads Golden Catering in Brampton, Ontario. Work with Chef Adrees to plan a menu around the dishes your family loves.</p>
+            <p className="intro">Chef and owner Adrees Athwal brings more than 20 years of experience to our family-run catering business. Work with our family to plan a menu around the dishes your guests will look forward to.</p>
+          </div>
+        </section>
+
+        <section className="services-areas" id="areas" aria-labelledby="areas-heading">
+          <div className="section shell">
+            <p className="eyebrow">Service areas</p>
+            <h2 id="areas-heading">Catering in Brampton and across the GTA.</h2>
+            <p className="intro">Choose the city where you’re hosting your event for menu ideas and venue-planning details.</p>
+            <ul className="city-grid">
+              {cities.map(city => (
+                <li key={city.slug}>
+                  <a href={'/catering/' + city.slug}>
+                    <strong>{city.name}</strong>
+                    <span>Indian &amp; Pakistani catering <span aria-hidden="true">→</span></span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="section shell review-section" id="reviews" aria-labelledby="reviews-heading">
+          <div>
+            <p className="eyebrow">Google reviews</p>
+            <h2 id="reviews-heading">What guests say about Golden Catering.</h2>
+          </div>
+          <div className="review-panel">
+            <p className="review-score"><strong>5.0</strong> <span aria-label="5 out of 5 stars">★★★★★</span></p>
+            <p>29 reviews on the Google listing</p>
+            <a className="button" href={googleProfile}>Read reviews on Google <span aria-hidden="true">→</span></a>
           </div>
         </section>
 
@@ -115,7 +155,7 @@ export default function Home() {
             <div>
               <p className="eyebrow">Booking inquiries</p>
               <h2 id="quote-heading">Book your event.</h2>
-              <p className="intro">Share your date, location, and guest count to prepare your booking inquiry. You can include favourite dishes and dietary needs.</p>
+              <p className="intro">Share your date, location, and guest count to send your booking inquiry. You can include favourite dishes and dietary needs.</p>
             </div>
             <QuoteForm />
           </div>
@@ -124,7 +164,11 @@ export default function Home() {
       <footer className="footer">
         <div className="shell footer-inner">
           <Brand />
-          <p>Brampton, Ontario, Canada</p>
+          <address className="footer-contact">
+            <span>Brampton, Ontario, Canada</span>
+            <a href={'tel:' + phone}>647-280-6639</a>
+            <a href={'mailto:' + contactEmail}>{contactEmail}</a>
+          </address>
           <a className="text-link" href="#quote">Book your event <span aria-hidden="true">→</span></a>
         </div>
       </footer>
