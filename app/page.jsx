@@ -8,7 +8,13 @@ function photo(id, width) {
 function Brand() {
   return (
     <a className="brand" href="#top" aria-label="Golden Catering home">
-      <span>Golden <small>Catering</small></span>
+      <Image
+        className="official-logo"
+        src="/golden-catering-logo.jpg"
+        width={480}
+        height={210}
+        alt="Golden Catering"
+      />
     </a>
   );
 }
@@ -125,5 +131,6 @@ export default function Home() {
     </>
   );
 }
+
 
 

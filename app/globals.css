@@ -341,3 +341,11 @@ h3 { font-size: 1.32rem; line-height: 1.2; }
   from { opacity: 0; transform: perspective(600px) translateY(1.4rem) rotateY(-30deg) rotateZ(-8deg); }
   to { opacity: 1; transform: perspective(600px) translateY(0) rotateY(0) rotateZ(0); }
 }
+
+.official-logo {
+  display: block;
+  width: clamp(8rem, 17vw, 11rem);
+  height: auto;
+  border-radius: .22rem;
+  background: #fff;
+}
