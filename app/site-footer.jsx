@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { businessAddress, cities, contactEmail, googleProfile, phone, siteNavigation } from './site-content';
+import { businessAddress, cities, contactEmail, googleProfile, phone, secondPhone, siteNavigation } from './site-content';
 
 export default function SiteFooter() {
   return (
@@ -42,6 +42,7 @@ export default function SiteFooter() {
                 {businessAddress.addressLocality}, {businessAddress.addressRegion} {businessAddress.postalCode}
               </a>
               <a href={'tel:' + phone}>647-280-6639</a>
+              <a href={'tel:' + secondPhone}>647-588-9916</a>
               <a href={'mailto:' + contactEmail}>{contactEmail}</a>
             </address>
           </div>
