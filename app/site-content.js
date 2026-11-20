@@ -1,6 +1,7 @@
 export const siteUrl = 'https://goldencatering.ca';
 export const contactEmail = 'goldencatering7@gmail.com';
 export const phone = '+16472806639';
+export const secondPhone = '+16475889916';
 export const businessAddress = {
   streetAddress: '11549 10 Line',
   addressLocality: 'Georgetown',
